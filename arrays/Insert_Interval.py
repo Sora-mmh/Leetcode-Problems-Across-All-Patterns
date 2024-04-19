@@ -17,6 +17,30 @@ class Solution:
             elif end1 == end2 or start1 == start2:
                 return True
 
+        ####### Solution 1 #######
+        newElstart, newElend = newInterval
+        idx = 0
+        insert = False
+        new_intervals = []
+        while idx < len(intervals):
+            if not overlap(intervals[idx], newInterval):
+                new_intervals.append(intervals[idx])
+                print("st", new_intervals)
+                idx += 1
+            else:
+                new_start = min(newInterval[0], intervals[idx][0])
+                new_end = max(newInterval[1], intervals[idx][1])
+                if len(new_intervals) != 0 and new_start in new_intervals[-1]:
+                    new_intervals.pop()
+                new_intervals.append([new_start, new_end])
+                newInterval = [new_start, new_end]
+                insert = True
+                idx += 1
+        if not insert or len(intervals) == 0:
+            new_intervals.append(newInterval)
+        return sorted(new_intervals)
+
+        ####### Solution 2 #######
         if len(intervals) == 0:
             return [newInterval]
         else:
