@@ -1,8 +1,6 @@
 def find_lvl_combinations(lvl):
-    l1, l2 = [e for e in range(lvl)], [e for e in range(lvl)]
-    l1.append(lvl)
-    l2.append(lvl)
-    combinations = [(e1, e2) for e1 in l1 for e2 in l2 if e1 + e2 == lvl]
+    l1, l2 = [-e for e in range(-lvl, lvl + 1)], [-e for e in range(-lvl, lvl + 1)]
+    combinations = [(e1, e2) for e1 in l1 for e2 in l2 if abs(e1 + e2) == lvl]
     return combinations
 
 
