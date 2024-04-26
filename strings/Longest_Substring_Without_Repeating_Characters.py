@@ -5,17 +5,18 @@ class Solution:
         if len(s) == 1:
             return 1
         else:
-            left, right = 0, len(s) - 1
+            end = 0
             max_len = 0
-            sub_string = ""
-            while left < len(s):
-                if s[left] not in sub_string:
-                    sub_string += s[left]
-                    print(sub_string)
-                    max_len = len(sub_string)
-                else:
-                    if max_len < len(sub_string):
-                        max_len = len(sub_string)
-                    sub_string = s[left]
-                left += 1
-            return max_len
+            characters = []
+            while end < len(s):
+                if s[end] in characters:
+                    if max_len < len(characters):
+                        max_len = len(characters)
+                    if s[end] == s[end - 1]:
+                        characters = []
+                    else:
+                        idx = characters.index(s[end])
+                        characters = characters[idx + 1 :]
+                characters.append(s[end])
+                end += 1
+            return max(max_len, len(characters))
