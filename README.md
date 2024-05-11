@@ -1,5 +1,5 @@
-# 25-Leetcode-Problems-Across-All-Patterns
-25 problems to cover the most important patterns
+# Leetcode-Problems-Across-All-Patterns
+Problems to cover the most important patterns
 
 ## 𝗚𝗿𝗮𝗽𝗵𝘀:
 
