@@ -12,6 +12,7 @@ class TreeNode:
 class Solution:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
         if root:
+            # root.left, root.right = root.right, root.left
             if root.right and root.left:
                 temp = root.right
                 root.right = root.left
