@@ -38,14 +38,17 @@ class Solution:
                     merged.next = next_node
                     merged = merged.next
                     list2 = list2.next
-            if list1:
-                while list1:
-                    merged.next = list1
-                    list1 = list1.next
-                    merged = merged.next
-            elif list2:
-                while list2:
-                    merged.next = list2
                     list2 = list2.next
-                    merged = merged.next
+            if list1 or list2:
+                merged.next = list1 if list1 else list2
+            # if list1:
+            #     while list1:
+            #         merged.next = list1
+            #         list1 = list1.next
+            #         merged = merged.next
+            # elif list2:
+            #     while list2:
+            #         merged.next = list2
+            #         list2 = list2.next
+            #         merged = merged.next
             return root
