@@ -1,5 +1,5 @@
 # Leetcode-Problems-Across-All-Patterns
-Problems to cover the most important patterns
+Recommended problems (some of them are solved on this repo) to cover the most important patterns
 
 ## 𝗚𝗿𝗮𝗽𝗵𝘀:
 
