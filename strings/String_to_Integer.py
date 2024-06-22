@@ -1,32 +1,46 @@
 class Solution:
     def myAtoi(self, s: str) -> int:
-        s = s.strip()
-        print("after deleting white spaces", s)
-        if s[0] == "-":
-            negative = True
-            s = s[1:]
-        else:
-            negative = False
-        print("if negative ", negative)
-        idx = 0
-        while s[0] == "0":
-            s = s[idx + 1 :]
-            idx += 1
-        print("after deleting zeros", s)
-        idx = 0
-        while idx < len(s):
-            if 48 <= ord(s[idx]) <= 57:
-                idx += 1
-            else:
+
+        digits, operators = "0123456789", "-+"
+        ops = {"-": -1, "+": 1}
+        encountred = []
+        s_list = list(s)
+        for i in range(len(s_list)):
+            if s_list[i] == " " and len(encountred) == 0:
+                s_list[i] = ""
+            elif s_list[i] == " " and len(encountred) != 0:
+                s_list = s_list[:i]
                 break
-        s = s[:idx]
-        print("after deleting non digits", s)
-        if negative:
-            s = "-" + s
-        print(s)
-        if int(s) > 2**31 - 1:
-            return 2**31 - 1
-        elif int(s) < -(2**31):
-            return -(2**31)
+            elif s_list[i] != " ":
+                encountred.append(s_list[i])
+        s = "".join(s_list)
+
+        if len(s) == 0:
+            return 0
         else:
-            return int(s)
+            if s[0] not in digits and s[0] not in operators:
+                return 0
+
+            digits_before_ops = []
+            for i in range(len(s)):
+                if s[i] in digits:
+                    digits_before_ops.append(s[i])
+                if (s[i] not in digits and s[i] not in operators) or (
+                    s[i] in operators and len(digits_before_ops) != 0
+                ):
+                    s = s[:i]
+                    break
+
+            if len(digits_before_ops) == 0:
+                return 0
+            else:
+                extracted_ops = [c for c in s if c in operators]
+                result = int("".join([c for c in s if c in digits]))
+                if len(extracted_ops) != 0:
+                    if len(extracted_ops) != 1:
+                        return 0
+                    else:
+                        result *= ops[extracted_ops[0]]
+                result = max(-(2**31), result)
+                result = min(result, 2**31 - 1)
+                return result
